@@ -72,7 +72,7 @@ class Cadastro extends JFrame{
 
         
         // Botões
-        JButton jButton = new JButton("Entrar");
+        JButton jButton = new JButton("Cadastrar");
         jButton.setBounds(290, 405, 400, 40); // margem esquerda, cima, comprimento, altura botão
         jButton.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
         jButton.setForeground(new Color(0, 0, 0));
@@ -92,15 +92,15 @@ class Cadastro extends JFrame{
     }
     
     private void entrar(ActionEvent actionEvent) {
-        // fazer o IF
-        JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.", "Erro de login", JOptionPane.WARNING_MESSAGE);
-        System.out.println("Eae");
+        // Fazer código para armazenar as variáveis aqui!
+        
+        this.dispose();
+        new Login();
     }
+  
     private void cadastro(ActionEvent actionEvent) {
         this.dispose(); // fecha a janela atual
         new Login(); // carrega a página de login
-        
-
     }
 }
 
