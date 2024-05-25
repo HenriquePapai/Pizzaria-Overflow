@@ -1,0 +1,11 @@
+O objetivo deste projeto foi criar uma pizzaria chamada "Pizzaria-Overflow" em java buscando alguns atingir alguns requisitos como:
+- Interface gráfica.
+- Classes e métodos abstratos.
+- Relações de herança.
+- Sobrescrita de métodos por uma subclasse.
+- Polimorfismo.
+- Relação de associação entre classes.
+- ArrayList.
+- Classe derivada da classe Exception.
+- O programa lê arquivos em txt.
+- Persistência de objetos.
