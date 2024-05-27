@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
   
-class Pizza extends JFrame {
+class Pedido extends JFrame {
     private JComboBox<String> tamanho;
     private JComboBox<String> sabor;
 
-    public Pizza() {
+    public Pedido() {
         setTitle("Cardápio");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,11 +92,5 @@ class Pizza extends JFrame {
     }
     private void FinalizarPedido(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
-    }
-}
-
-public class pPedido {
-    public static void main(String[] args) {
-        new Pizza();
     }
 }

@@ -104,8 +104,3 @@ class Cadastro extends JFrame{
     }
 }
 
-public class pCadastro {
-    public static void main(String[] args) {
-        new Cadastro();
-    }
-}
