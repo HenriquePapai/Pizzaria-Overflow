@@ -131,6 +131,13 @@ class Login extends JFrame{
     private void cadastro(ActionEvent actionEvent) {
         this.dispose(); // fecha a janela atual
         new Cadastro(); // carrega a página de cadastro
+
+
     }
 }
 
+public class pLogin {
+    public static void main(String[] args) {
+        new Login();
+    }
+}
