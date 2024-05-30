@@ -1,17 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-  
+import java.io.*;
+
 class Pedido extends JFrame {
     private JComboBox<String> tamanho;
     private JComboBox<String> sabor;
+    private double ValorTotal;
+    private JLabel jLabel4;
 
     public Pedido() {
         setTitle("Cardápio");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false); // trava o tamanho da tela
-        setLocationRelativeTo(null); // centraliza a tela        
+        setLocationRelativeTo(null); // centraliza a tela
+
         setLayout(null);
 
 
@@ -36,7 +40,7 @@ class Pedido extends JFrame {
         jLabel3.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel3);
 
-        JLabel jLabel4 = new JLabel("Valor total: ");
+        jLabel4 = new JLabel("Valor total: " + ValorTotal);
         jLabel4.setBounds(290, 368, 200, 50); // margem esquerda, cima, comprimento, altura
         jLabel4.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel4);
@@ -86,11 +90,44 @@ class Pedido extends JFrame {
 
         setVisible(true);
     }
+
     
     private void AdicionarPedido(ActionEvent actionEvent) {
-        JOptionPane.showMessageDialog(null, "Pedido adicionado com sucesso.", "Pedido adicionado", JOptionPane.INFORMATION_MESSAGE);
+        String tamanhoSelecionado = (String) tamanho.getSelectedItem();
+        String saborSelecionado = (String) sabor.getSelectedItem();
+        Pizza pizza = null;
+
+        switch (tamanhoSelecionado) {
+            case "Broto":
+                pizza = new PizzaBroto(tamanhoSelecionado);
+                break;
+            case "Pequena":
+                pizza = new PizzaPequena(tamanhoSelecionado);
+                break;
+            case "Média":
+                pizza = new PizzaMedia(tamanhoSelecionado);
+                break; 
+            case "Grande":
+                pizza = new PizzaGrande(tamanhoSelecionado);     
+                break;
+        }
+            
+        ValorTotal += pizza.calculaPreco();
+        this.jLabel4.setText("Valor total: " + ValorTotal);
+        
+        try {
+            FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao pedidos.txt e não sobrescrito
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
+            bw.write(tamanhoSelecionado + ": " + saborSelecionado + ", R$" + pizza.calculaPreco());
+            bw.newLine();
+            bw.close(); // fecha o BufferedWriter após escrever
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private void FinalizarPedido(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose(); // fecha a janela atual
+        new Comanda(); // carrega a página de login
     }
 }

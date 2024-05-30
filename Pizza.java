@@ -1,10 +1,8 @@
 abstract class Pizza {
   protected String tamanho;
-  protected double valor;
 
-  public Pizza(String tamanho, double valor) {
+  public Pizza(String tamanho) {
     this.tamanho = tamanho;
-    this.valor = valor;
   }
 
   public abstract double calculaPreco();
@@ -15,38 +13,38 @@ abstract class Pizza {
 }
 
 class PizzaGrande extends Pizza {
-  public PizzaGrande(String tamanho, double valor) {
-    super(tamanho, valor);
+  public PizzaGrande(String tamanho) {
+    super(tamanho);
   }
   public double calculaPreco() {
-    return valor += 75;
+    return 75;
   }
 }
 
 class PizzaMedia extends Pizza {
-  public PizzaMedia(String tamanho, double valor) {
-    super(tamanho, valor);
+  public PizzaMedia(String tamanho) {
+    super(tamanho);
   }
   public double calculaPreco() {
-    return valor += 60;
+    return 60;
   }
 }
 
 class PizzaPequena extends Pizza {
-  public PizzaPequena(String tamanho, double valor) {
-    super(tamanho, valor);
+  public PizzaPequena(String tamanho) {
+    super(tamanho);
   }
   public double calculaPreco() {
-    return valor += 45;
+    return 45;
   }
 }
 
 class PizzaBroto extends Pizza {
-  public PizzaBroto(String tamanho, double valor) {
-    super(tamanho, valor);
+  public PizzaBroto(String tamanho) {
+    super(tamanho);
   }
   public double calculaPreco() {
-    return valor += 35;
+    return 35;
   }
 }
 
