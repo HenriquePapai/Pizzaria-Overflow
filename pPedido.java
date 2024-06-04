@@ -2,12 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.io.IOException;
 
 class Pedido extends JFrame {
     private JComboBox<String> tamanho;
     private JComboBox<String> sabor;
     private double ValorTotal;
     private JLabel jLabel4;
+
+    public class PedidoException extends Exception {
+        public PedidoException(String mensagem) {
+            super(mensagem);
+        }
+    }
+
 
     public Pedido() {
         setTitle("Cardápio");
@@ -110,6 +118,12 @@ class Pedido extends JFrame {
             case "Grande":
                 pizza = new PizzaGrande(tamanhoSelecionado);     
                 break;
+            default:
+                try {
+                    throw new PedidoException("O tamanho da pizza é inválido: " + tamanhoSelecionado);
+                } catch (Pedido.PedidoException e) {
+                    e.printStackTrace();
+                }
         }
             
         ValorTotal += pizza.calculaPreco();
