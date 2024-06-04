@@ -6,10 +6,6 @@ abstract class Pizza {
   }
 
   public abstract double calculaPreco();
-  
-  public void mostraPreco() {
-    System.out.println(calculaPreco());
-  }
 }
 
 class PizzaGrande extends Pizza {
