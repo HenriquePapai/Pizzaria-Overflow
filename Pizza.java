@@ -1,11 +1,9 @@
-abstract class Pizza {
+abstract class Pizza extends CalculaPreco {
   protected String tamanho;
 
   public Pizza(String tamanho) {
     this.tamanho = tamanho;
   }
-
-  public abstract double calculaPreco();
 }
 
 class PizzaGrande extends Pizza {
