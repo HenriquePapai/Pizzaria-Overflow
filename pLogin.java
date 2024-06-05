@@ -16,10 +16,16 @@ class Login extends JFrame{
     private JTextField email;
     private JTextField senha;
 
-    //Informações dos arquivos txt
-    private ArrayList<String> user = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
+    //teste
+    private JTextField nome;
 
-    private ArrayList<String> pass = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
+    //Informações dos arquivos txt
+    private ArrayList<String> user = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/users.txt");
+
+    private ArrayList<String> pass = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/senhas.txt");
+
+    //teste
+    private ArrayList<String> name = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/name.txt");
 
     // Trazer os usuarios para dentro do ArrayList user
     public static ArrayList<String> lerArquivo(String nomeArquivo) {
@@ -109,6 +115,17 @@ class Login extends JFrame{
 
         setVisible(true);
     }
+    private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
+    private String emailUsuario; // adiciona um membro para armazenar o email do usuário
+
+    public String getNomeUsuario() { // Obtém o nome do usuário
+        return nomeUsuario;
+    }
+
+    public String getEmailUsuario() { // Obtém o email do usuário
+        return emailUsuario;
+    }
+
 
     private void entrar(ActionEvent actionEvent) {
         // fazer o IF
@@ -119,6 +136,8 @@ class Login extends JFrame{
             // Pegar o texto que está dentro do JTextField
             if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) {
                 loginValido = true;
+                nomeUsuario = name.get(i);
+                emailUsuario = emailDigitado;
                 break;
             }
         }

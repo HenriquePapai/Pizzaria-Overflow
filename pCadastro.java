@@ -100,6 +100,7 @@ class Cadastro extends JFrame{
 
         ArrayList<String> user = new ArrayList<>();
         ArrayList<String> pass = new ArrayList<>();
+        ArrayList<String> name = new ArrayList<>();
 
         // Obter os dados digitados pelo usuário para cadastro
         String nomeDigitado = nome.getText();
@@ -110,10 +111,12 @@ class Cadastro extends JFrame{
         // Adicionar os novos dados às listas
         user.add(emailDigitado + ",");
         pass.add(senhaDigitada + ",");
+        name.add(nomeDigitado + ",");
 
         // Escrever as listas atualizadas nos arquivos
-        escreverArquivo(user, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
-        escreverArquivo(pass, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
+        escreverArquivo(user, "C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/users.txt");
+        escreverArquivo(pass, "C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/senhas.txt");
+        escreverArquivo(name, "C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/name.txt");
 
         // Fechar a janela atual e abrir a de login
         this.dispose();
