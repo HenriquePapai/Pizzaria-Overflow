@@ -15,15 +15,14 @@ import java.io.IOException;
 class Login extends JFrame{
     private JTextField email;
     private JTextField senha;
-    private JTextField nome;
 
     //Informações dos arquivos txt
-    private ArrayList<String> user = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/users.txt");
+    private ArrayList<String> user = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
 
-    private ArrayList<String> pass = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/senhas.txt");
+    private ArrayList<String> pass = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
 
     //teste
-    private ArrayList<String> name = lerArquivo("C:/Estudos/Programação Orientada a Objetos/PjBL/Pizzaria-Overflow-main/name.txt");
+    private ArrayList<String> name = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/name.txt");
 
     // Trazer os usuarios para dentro do ArrayList user
     public static ArrayList<String> lerArquivo(String nomeArquivo) {
@@ -35,6 +34,7 @@ class Login extends JFrame{
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] items = line.split(",");
+                //Criando manualmente
                 for (String item : items) {
                     list.add(item); // Se for adicionar espaços entre os parametros adicionar o .trim()
                 }
@@ -113,17 +113,10 @@ class Login extends JFrame{
 
         setVisible(true);
     }
-    private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
-    private String emailUsuario; // adiciona um membro para armazenar o email do usuário
+    public String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
+    public String emailUsuario; // adiciona um membro para armazenar o email do usuário
 
-    public String getNomeUsuario() { // Obtém o nome do usuário
-        return nomeUsuario;
-    }
-
-    public String getEmailUsuario() { // Obtém o email do usuário
-        return emailUsuario;
-    }
-
+    public static String nomeUsuarioLogado;
 
     private void entrar(ActionEvent actionEvent) {
         // fazer o IF
@@ -136,6 +129,7 @@ class Login extends JFrame{
                 loginValido = true;
                 nomeUsuario = name.get(i);
                 emailUsuario = emailDigitado;
+                nomeUsuarioLogado = nomeUsuario;
                 break;
             }
         }
@@ -153,4 +147,3 @@ class Login extends JFrame{
         new Cadastro(); // carrega a página de cadastro
     }
 }
-

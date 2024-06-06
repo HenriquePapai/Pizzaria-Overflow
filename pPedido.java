@@ -4,18 +4,17 @@ import java.awt.event.ActionEvent;
 import java.io.*;
 import java.io.IOException;
 
-class Pedido extends JFrame {
+class Pedido extends JFrame{
     private JComboBox<String> tamanho;
     private JComboBox<String> sabor;
     private double ValorTotal;
     private JLabel jLabel4;
 
-    public class PedidoException extends Exception {
+    static public class PedidoException extends Exception {
         public PedidoException(String mensagem) {
             super(mensagem);
         }
     }
-
 
     public Pedido() {
         setTitle("Cardápio");
@@ -105,40 +104,49 @@ class Pedido extends JFrame {
         String saborSelecionado = (String) sabor.getSelectedItem();
         Pizza pizza = null;
 
-        switch (tamanhoSelecionado) {
-            case "Broto":
-                pizza = new PizzaBroto(tamanhoSelecionado);
-                break;
-            case "Pequena":
-                pizza = new PizzaPequena(tamanhoSelecionado);
-                break;
-            case "Média":
-                pizza = new PizzaMedia(tamanhoSelecionado);
-                break; 
-            case "Grande":
-                pizza = new PizzaGrande(tamanhoSelecionado);     
-                break;
-            default:
-                try {
-                    throw new PedidoException("O tamanho da pizza é inválido: " + tamanhoSelecionado);
-                } catch (Pedido.PedidoException e) {
-                    e.printStackTrace();
-                }
+        if (tamanhoSelecionado != null) {
+            switch (tamanhoSelecionado) {
+                case "Broto":
+                    pizza = new PizzaBroto(tamanhoSelecionado);
+                    break;
+                case "Pequena":
+                    pizza = new PizzaPequena(tamanhoSelecionado);
+                    break;
+                case "Média":
+                    pizza = new PizzaMedia(tamanhoSelecionado);
+                    break;
+                case "Grande":
+                    pizza = new PizzaGrande(tamanhoSelecionado);
+                    break;
+                default:
+                    try {
+                        throw new PedidoException("O tamanho da pizza é inválido: " + tamanhoSelecionado);
+                    } catch (Pedido.PedidoException e) {
+                        e.printStackTrace();
+                    }
+            }
+        } else {
+            System.out.println("NullPointerException (tamanhoSelecionado)");
         }
-            
-        ValorTotal += pizza.calculaPreco();
-        this.jLabel4.setText("Valor total: " + ValorTotal);
-        
-        try {
-            FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao pedidos.txt e não sobrescrito
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
-            bw.write(tamanhoSelecionado + ": " + saborSelecionado + ", R$" + pizza.calculaPreco());
-            bw.newLine();
-            bw.close(); // fecha o BufferedWriter após escrever
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (pizza != null) {
+            ValorTotal += pizza.calculaPreco();
+            this.jLabel4.setText("Valor total: " + ValorTotal);
+
+            try {
+                FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao pedidos.txt e não sobrescrito
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
+                bw.write(Login.nomeUsuarioLogado.toUpperCase() + ": " + tamanhoSelecionado + " - " + saborSelecionado + " - R$" + pizza.calculaPreco());
+                bw.newLine();
+                bw.close(); // fecha o BufferedWriter após escrever
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("NullPointerException (pizza)");
         }
     }
+
     private void FinalizarPedido(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
         this.dispose(); // fecha a janela atual
