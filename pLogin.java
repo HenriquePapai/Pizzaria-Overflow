@@ -15,8 +15,6 @@ import java.io.IOException;
 class Login extends JFrame{
     private JTextField email;
     private JTextField senha;
-
-    //teste
     private JTextField nome;
 
     //Informações dos arquivos txt
