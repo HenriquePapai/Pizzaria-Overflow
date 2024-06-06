@@ -13,7 +13,6 @@ class Comanda extends JFrame{
         setLayout(null);
 
 
-
         // Label
         JLabel titulo = new JLabel("Comanda");
         titulo.setBounds(378, 70, 300, 80); // margem esquerda, cima, comprimento, altura
@@ -31,14 +30,14 @@ class Comanda extends JFrame{
         
         try { // Lê o arquivo "pedidos.txt"
             FileInputStream fis = new FileInputStream("pedidos.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-            String line;
-            while ((line = br.readLine()) != null) {
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis)); // lê as linhas do arquivo
+            String line; // variável para armazenar cada linha do arquivo
+            while ((line = br.readLine()) != null) { // enquanto tiver linhas para ler, adiciona a linha lida no campo
                 textArea.append(line + "\n");
             }
             br.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // imprime o erro
         }
 
         setVisible(true);

@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-
-// Novos imports para parte de cadastro
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +18,6 @@ class Cadastro extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false); // trava o tamanho da tela
         setLocationRelativeTo(null); // centraliza a tela
-        //getContentPane().setBackground(new Color(206, 159, 0));
 
         setLayout(null);
 
@@ -97,12 +94,12 @@ class Cadastro extends JFrame{
     }
 
     private void entrar(ActionEvent actionEvent) {
-
+        // cria os ArrayList para armazenar os dados do usuário
         ArrayList<String> user = new ArrayList<>();
         ArrayList<String> pass = new ArrayList<>();
         ArrayList<String> name = new ArrayList<>();
 
-        // Obter os dados digitados pelo usuário para cadastro
+        // Obtém os dados digitados pelo usuário para cadastro
         String nomeDigitado = nome.getText();
         String emailDigitado = email.getText();
         //String cpfDigitado = cpf.getText();
@@ -113,7 +110,7 @@ class Cadastro extends JFrame{
         pass.add(senhaDigitada + ",");
         name.add(nomeDigitado + ",");
 
-        // Escrever as listas atualizadas nos arquivos
+        // Escreve nas listas dos arquivos correspondentes
         escreverArquivo(user, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
         escreverArquivo(pass, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
         escreverArquivo(name, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/name.txt");
@@ -126,11 +123,11 @@ class Cadastro extends JFrame{
     // Método para escrever no arquivo
     public static void escreverArquivo(ArrayList<String> lista, String nomeArquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
-            for (String item : lista) {
+            for (String item : lista) {  // Escreve cada item da lista no arquivo
                 writer.write(item + "\n");
             }
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao escrever no arquivo.");
+            System.out.println("Ocorreu um erro ao tentar escrever no arquivo.");
             e.printStackTrace();
         }
     }

@@ -10,11 +10,6 @@ class Pedido extends JFrame{
     private double ValorTotal;
     private JLabel jLabel4;
 
-    static public class PedidoException extends Exception {
-        public PedidoException(String mensagem) {
-            super(mensagem);
-        }
-    }
 
     public Pedido() {
         setTitle("Cardápio");
@@ -99,10 +94,10 @@ class Pedido extends JFrame{
     }
 
     
-    private void AdicionarPedido(ActionEvent actionEvent) {
-        String tamanhoSelecionado = (String) tamanho.getSelectedItem();
-        String saborSelecionado = (String) sabor.getSelectedItem();
-        Pizza pizza = null;
+    private void AdicionarPedido(ActionEvent actionEvent) { // adiciona o pedido ao clicar no botão
+        String tamanhoSelecionado = (String) tamanho.getSelectedItem(); // pega o tamanho selecionado da JComboBox
+        String saborSelecionado = (String) sabor.getSelectedItem(); // pega o sabor selecionado da JComboBox
+        Pizza pizza = null; // variável para armazenar a pizza
 
         if (tamanhoSelecionado != null) {
             switch (tamanhoSelecionado) {
@@ -118,36 +113,37 @@ class Pedido extends JFrame{
                 case "Grande":
                     pizza = new PizzaGrande(tamanhoSelecionado);
                     break;
-                default:
+                default: // se o tamanho não corresponder a nenhum anterior, lança uma exceção
                     try {
                         throw new PedidoException("O tamanho da pizza é inválido: " + tamanhoSelecionado);
-                    } catch (Pedido.PedidoException e) {
+                    } catch (PedidoException e) {
                         e.printStackTrace();
                     }
             }
-        } else {
-            System.out.println("NullPointerException (tamanhoSelecionado)");
+        } else { // imprime um erro caso nenhum tamanho seja selecionado
+            System.out.println("Nenhum tamanho selecionado");
         }
 
         if (pizza != null) {
-            ValorTotal += pizza.calculaPreco();
+            ValorTotal += pizza.calculaPreco(); // Calcula o valor total somando o preço da pizza selecionada
             this.jLabel4.setText("Valor total: " + ValorTotal);
 
-            try {
-                FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao pedidos.txt e não sobrescrito
+            try { // Escreve os dados do pedido no arquivo pedidos.txt
+                FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao
+                                                                                  // pedidos.txt e não sobrescrito
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
                 bw.write(Login.nomeUsuarioLogado.toUpperCase() + ": " + tamanhoSelecionado + " - " + saborSelecionado + " - R$" + pizza.calculaPreco());
-                bw.newLine();
-                bw.close(); // fecha o BufferedWriter após escrever
+                bw.newLine(); // adiciona uma nova linha para cada pedido selecionado
+                bw.close(); // fecha o BufferedWriter
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("NullPointerException (pizza)");
+            System.out.println("Nenhuma pizza foi selecionada");
         }
     }
 
-    private void FinalizarPedido(ActionEvent actionEvent) {
+    private void FinalizarPedido(ActionEvent actionEvent) { // finaliza o pedido ao clicar no botão
         JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
         this.dispose(); // fecha a janela atual
         new Comanda(); // carrega a página de login

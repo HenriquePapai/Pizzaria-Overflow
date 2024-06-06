@@ -16,38 +16,34 @@ class Login extends JFrame{
     private JTextField email;
     private JTextField senha;
 
-    //Informações dos arquivos txt
+    // Criando ArrayList e lendo o conteúdo do arquivos respectivos arquivos
     private ArrayList<String> user = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
 
     private ArrayList<String> pass = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
 
-    //teste
     private ArrayList<String> name = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/name.txt");
 
-    // Trazer os usuarios para dentro do ArrayList user
+    // Lê o conteúdo do arquivo
     public static ArrayList<String> lerArquivo(String nomeArquivo) {
         ArrayList<String> list = new ArrayList<>();
 
-        // Tenta puxar as informações do arquivo txt
+        // Tenta ler o arquivo
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo));
+            BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo)); // Cria o BufferedReader para ler o arquivo
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] items = line.split(",");
-                //Criando manualmente
+            while ((line = reader.readLine()) != null) { // 
+                String[] items = line.split(","); // Divide os elementos separados por vírgula
                 for (String item : items) {
-                    list.add(item); // Se for adicionar espaços entre os parametros adicionar o .trim()
+                    list.add(item); // Adiciona na lista
                 }
             }
             reader.close();
-            // Caso o arquivo não seja encontrado
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { // Caso o arquivo não seja encontrado
             System.out.println("O arquivo não foi encontrado.");
-            e.printStackTrace();
-            // Caso ocorra algum erro ao ler o arquivo
-        } catch (IOException e) {
+            e.printStackTrace(); // Imprime o erro
+        } catch (IOException e) { // Caso ocorra algum erro ao ler o arquivo
             System.out.println("Ocorreu um erro ao ler o arquivo.");
-            e.printStackTrace();
+            e.printStackTrace(); // Imprime o erro
         }
         return list;
     }
@@ -58,7 +54,6 @@ class Login extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false); // trava o tamanho da tela
         setLocationRelativeTo(null); // centraliza a tela
-        //getContentPane().setBackground(new Color(206, 159, 0));
 
         setLayout(null);
 
@@ -116,19 +111,17 @@ class Login extends JFrame{
     public String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
     public String emailUsuario; // adiciona um membro para armazenar o email do usuário
 
-    public static String nomeUsuarioLogado;
+    public static String nomeUsuarioLogado; // armazena o nome do usuário logado
 
     private void entrar(ActionEvent actionEvent) {
-        // fazer o IF
         boolean loginValido = false;
-        String emailDigitado = email.getText();
-        String senhaDigitada = senha.getText();
+        String emailDigitado = email.getText(); // pega o email digitado pelo usuário
+        String senhaDigitada = senha.getText(); // pega a senha digitado pelo usuário
         for (int i = 0; i < user.size(); i++) {
-            // Pegar o texto que está dentro do JTextField
-            if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) {
+            if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) { // Pega o texto que está dentro do JTextField
                 loginValido = true;
-                nomeUsuario = name.get(i);
-                emailUsuario = emailDigitado;
+                nomeUsuario = name.get(i); // pega o nome do usuário correspondente ao login e salva no nomeUsuario
+                emailUsuario = emailDigitado; // pega o email do usuário correspondente ao login e salva no emailUsuario
                 nomeUsuarioLogado = nomeUsuario;
                 break;
             }
@@ -136,7 +129,6 @@ class Login extends JFrame{
 
         if (loginValido) {
             this.dispose();
-            // Página para onde ele envia após estar logado
             new Pedido();
         } else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.", "Erro de login", JOptionPane.WARNING_MESSAGE);
