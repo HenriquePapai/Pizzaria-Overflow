@@ -10,6 +10,12 @@ class Pedido extends JFrame{
     private double ValorTotal;
     private JLabel jLabel4;
 
+    private String nomeUsuario;
+
+    // Método setter para nomeUsuario
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario.toUpperCase(); // Converte para maiúsculas e armazena
+    }
 
     public Pedido() {
         setTitle("Cardápio");
@@ -132,7 +138,7 @@ class Pedido extends JFrame{
                 FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao
                                                                                   // pedidos.txt e não sobrescrito
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
-                bw.write(Login.nomeUsuarioLogado.toUpperCase() + ": " + tamanhoSelecionado + " - " + saborSelecionado + " - R$" + pizza.calculaPreco());
+                bw.write( nomeUsuario + ": " + tamanhoSelecionado + " - " + saborSelecionado + " - R$" + pizza.calculaPreco());
                 bw.newLine(); // adiciona uma nova linha para cada pedido selecionado
                 bw.close(); // fecha o BufferedWriter
             } catch (IOException e) {

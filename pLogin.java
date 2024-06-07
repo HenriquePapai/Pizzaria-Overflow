@@ -108,10 +108,8 @@ class Login extends JFrame{
 
         setVisible(true);
     }
-    public String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
-    public String emailUsuario; // adiciona um membro para armazenar o email do usuário
 
-    public static String nomeUsuarioLogado; // armazena o nome do usuário logado
+    private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
 
     private void entrar(ActionEvent actionEvent) {
         boolean loginValido = false;
@@ -121,15 +119,15 @@ class Login extends JFrame{
             if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) { // Pega o texto que está dentro do JTextField
                 loginValido = true;
                 nomeUsuario = name.get(i); // pega o nome do usuário correspondente ao login e salva no nomeUsuario
-                emailUsuario = emailDigitado; // pega o email do usuário correspondente ao login e salva no emailUsuario
-                nomeUsuarioLogado = nomeUsuario;
+                //emailUsuario = emailDigitado; // pega o email do usuário correspondente ao login e salva no emailUsuario
                 break;
             }
         }
 
         if (loginValido) {
             this.dispose();
-            new Pedido();
+            Pedido pedido = new Pedido(); // Abre a nova página de Pedido
+            pedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
         } else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.", "Erro de login", JOptionPane.WARNING_MESSAGE);
         }
