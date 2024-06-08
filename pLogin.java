@@ -17,11 +17,31 @@ class Login extends JFrame{
     private JTextField senha;
 
     // Criando ArrayList e lendo o conteúdo do arquivos respectivos arquivos
-    private ArrayList<String> user = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
+    private ArrayList<String> user = lerArquivo(Main.localArquivo + "users.txt");
 
-    private ArrayList<String> pass = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
+    private ArrayList<String> pass = lerArquivo(Main.localArquivo + "senhas.txt");
 
-    private ArrayList<String> name = lerArquivo("C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/name.txt");
+    private ArrayList<String> name = lerArquivo(Main.localArquivo + "name.txt");
+
+    // Método para decifrar o texto com a cifra de César com pulo variavel
+    public static String decifrarTexto(String textoCifrado) {
+        String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.";
+        StringBuilder textoDecifrado = new StringBuilder();
+        int salto = 2; // Salto inicial
+        for (char caracter : textoCifrado.toCharArray()) {
+            int index = alfabeto.indexOf(caracter);
+            if (index != -1) {
+                // Decifra o caractere se ele estiver no alfabeto
+                char decifrado = alfabeto.charAt((index - salto + alfabeto.length()) % alfabeto.length());
+                textoDecifrado.append(decifrado);
+                salto++; // Ajusta o salto para o próximo caractere
+            } else {
+                // Mantém o caractere original se não estiver no alfabeto
+                textoDecifrado.append(caracter);
+            }
+        }
+        return textoDecifrado.toString();
+    }
 
     // Lê o conteúdo do arquivo
     public static ArrayList<String> lerArquivo(String nomeArquivo) {
@@ -31,8 +51,10 @@ class Login extends JFrame{
         try {
             BufferedReader reader = new BufferedReader(new FileReader(nomeArquivo)); // Cria o BufferedReader para ler o arquivo
             String line;
-            while ((line = reader.readLine()) != null) { // 
-                String[] items = line.split(","); // Divide os elementos separados por vírgula
+            while ((line = reader.readLine()) != null) {
+                // Trecho para recuperar a senha cifrada
+                String decifrado = decifrarTexto(line); // Decifra a linha antes de dividir
+                String[] items = decifrado.split(","); // Divide os elementos separados por vírgula
                 for (String item : items) {
                     list.add(item); // Adiciona na lista
                 }

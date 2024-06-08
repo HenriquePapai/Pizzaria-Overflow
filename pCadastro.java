@@ -111,20 +111,42 @@ class Cadastro extends JFrame{
         name.add(nomeDigitado + ",");
 
         // Escreve nas listas dos arquivos correspondentes
-        escreverArquivo(user, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/users.txt");
-        escreverArquivo(pass, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/senhas.txt");
-        escreverArquivo(name, "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/name.txt");
+        escreverArquivo(user, Main.localArquivo + "users.txt");
+        escreverArquivo(pass, Main.localArquivo + "senhas.txt");
+        escreverArquivo(name, Main.localArquivo + "name.txt");
 
         // Fechar a janela atual e abrir a de login
         this.dispose();
         new Login();
     }
 
+    // Método para cifrar o texto com a cifra de César com pulo variavel
+    public static String cifrarTexto(String texto) {
+        String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.";
+        StringBuilder textoCifrado = new StringBuilder();
+        int salto = 2; // Salto inicial
+        for (char caracter : texto.toCharArray()) {
+            int index = alfabeto.indexOf(caracter);
+            if (index != -1) {
+                // Cifra o caractere se ele estiver no alfabeto
+                char cifrado = alfabeto.charAt((index + salto) % alfabeto.length());
+                textoCifrado.append(cifrado);
+                salto++; // Aumenta o salto para o próximo caractere
+            } else {
+                // Mantém o caractere original se não estiver no alfabeto
+                textoCifrado.append(caracter);
+            }
+        }
+        return textoCifrado.toString();
+    }
+
     // Método para escrever no arquivo
     public static void escreverArquivo(ArrayList<String> lista, String nomeArquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
             for (String item : lista) {  // Escreve cada item da lista no arquivo
-                writer.write(item + "\n");
+                // Cifrar o conteudo
+                String itemCifrado = cifrarTexto(item);  // Cifra o item antes de escrever no arquivo
+                writer.write(itemCifrado + "\n");
             }
         } catch (IOException e) {
             System.out.println("Ocorreu um erro ao tentar escrever no arquivo.");
