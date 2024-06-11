@@ -11,6 +11,13 @@ import java.util.ArrayList;
 
 class ConfirmaPedido extends JFrame {
 
+    private String nomeUsuario;
+
+    // Método setter para nomeUsuario
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario.toUpperCase(); // Converte para maiúsculas e armazena
+    }
+
     public ConfirmaPedido() {
         setTitle("Confirmar Pedido");
         setSize(1000, 600);
@@ -53,7 +60,7 @@ class ConfirmaPedido extends JFrame {
             FileInputStream fis = new FileInputStream("pedidos.ser"); // Abre arquivo para leitura usando FileInputStream
             ObjectInputStream ois = new ObjectInputStream(fis); // Cria o ObjectInputStream para ler o arquivo
             ArrayList<PedidoItem> pedidosRecuperados = (ArrayList<PedidoItem>) ois.readObject(); // Lê o arquivo e armazena em uma lista
-            System.out.println("Pedidos finalizados:");
+            System.out.println("Pedidos de " +  nomeUsuario + " finalizados:");
             for (PedidoItem pedido : pedidosRecuperados) {
                 System.out.println(pedido);
             }
