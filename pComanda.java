@@ -1,4 +1,4 @@
-import javax.swing.*;
+/*import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
@@ -42,7 +42,7 @@ class Comanda extends JFrame{
 
         setVisible(true);
     }
-}
+}*/
 
 
 

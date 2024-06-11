@@ -4,8 +4,9 @@ class Main {
     Login pLogin = new Login();
     //Pedido pPedido = new Pedido();
     //Comanda pComanda = new Comanda();
+    //ConfirmaPedido pConfirmaPedido = new ConfirmaPedido();
   }
 
   // Alterar aqui para o código funcionar
-  public static String localArquivo = "C:/Users/ericr/Documents/3 - Periodo/Programação Orientada a Objetos/PROJETO FINAL/ProjFinal/interface/src/";
+  public static String localArquivo = "";
 }

@@ -3,14 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
-class Pedido extends JFrame{
+class Pedido extends JFrame {
     private JComboBox<String> tamanho;
     private JComboBox<String> sabor;
     private double ValorTotal;
     private JLabel jLabel4;
-
     private String nomeUsuario;
+    private ArrayList<PedidoItem> pedidos = new ArrayList<PedidoItem>();
+    private static double valorTotal = 0.0;
 
     // Método setter para nomeUsuario
     public void setNomeUsuario(String nomeUsuario) {
@@ -48,6 +50,7 @@ class Pedido extends JFrame{
         jLabel3.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel3);
 
+        ValorTotal = valorTotal; // armazena o valor total em uma variável estática
         jLabel4 = new JLabel("Valor total: " + ValorTotal);
         jLabel4.setBounds(290, 368, 200, 50); // margem esquerda, cima, comprimento, altura
         jLabel4.setFont(new Font("Arial", Font.BOLD, 20));
@@ -94,7 +97,7 @@ class Pedido extends JFrame{
         jButton2.setForeground(new Color(0, 0, 0));
         jButton2.setBackground(new Color(190, 196, 201));
         add(jButton2);
-        jButton2.addActionListener(this::FinalizarPedido);
+        jButton2.addActionListener(this::ConfirmaPedido);
 
         setVisible(true);
     }
@@ -132,15 +135,17 @@ class Pedido extends JFrame{
 
         if (pizza != null) {
             ValorTotal += pizza.calculaPreco(); // Calcula o valor total somando o preço da pizza selecionada
+            valorTotal = ValorTotal;
             this.jLabel4.setText("Valor total: " + ValorTotal);
+            PedidoItem pedidoItem = new PedidoItem(tamanhoSelecionado, saborSelecionado, pizza.calculaPreco());
+            pedidos.add(pedidoItem);
 
-            try { // Escreve os dados do pedido no arquivo pedidos.txt
-                FileOutputStream fos = new FileOutputStream("pedidos.txt", true); // cria o FileOutputStream, true significa que será adicionado ao
-                                                                                  // pedidos.txt e não sobrescrito
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos)); // cria o BufferedWriter para escrever no arquivo
-                bw.write( nomeUsuario + ": " + tamanhoSelecionado + " - " + saborSelecionado + " - R$" + pizza.calculaPreco());
-                bw.newLine(); // adiciona uma nova linha para cada pedido selecionado
-                bw.close(); // fecha o BufferedWriter
+            try {
+                FileOutputStream fos = new FileOutputStream("pedidos.ser"); // cria do FileOutputStream para escrever no arquivo "pedidos.ser"
+                ObjectOutputStream oos = new ObjectOutputStream(fos); // cria o ObjectOutputStream para escrever no FileOutputStream
+                oos.writeObject(pedidos); // Escreve no "pedidos.ser" usando o ObjectOutputStream
+                oos.close(); // Fecha o ObjectOutputStream
+                fos.close(); // Fecha o FileOutputStream
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -149,9 +154,8 @@ class Pedido extends JFrame{
         }
     }
 
-    private void FinalizarPedido(ActionEvent actionEvent) { // finaliza o pedido ao clicar no botão
-        JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
+    private void ConfirmaPedido(ActionEvent actionEvent) { // redireciona para a página de confirmar pedido
         this.dispose(); // fecha a janela atual
-        new Comanda(); // carrega a página de login
+        new ConfirmaPedido(); // carrega a página de login
     }
 }

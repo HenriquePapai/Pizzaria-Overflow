@@ -23,10 +23,11 @@ class Login extends JFrame{
 
     private ArrayList<String> name = lerArquivo(Main.localArquivo + "name.txt");
 
+    /*
     // Novos ArrayList
     private ArrayList<String> admuser = lerArquivo(Main.localArquivo + "admusers.txt");
 
-    private ArrayList<String> admpass = lerArquivo(Main.localArquivo + "admsenhas.txt");
+    private ArrayList<String> admpass = lerArquivo(Main.localArquivo + "admsenhas.txt");*/
 
     // Método para decifrar o texto com a cifra de César com pulo variavel
     public static String decifrarTexto(String textoCifrado) {
@@ -150,21 +151,21 @@ class Login extends JFrame{
                 break;
             }
         }
-        for (int i = 0; i < admuser.size(); i++) {
+        /*for (int i = 0; i < admuser.size(); i++) {
             if (admuser.get(i).equals(emailDigitado) && admpass.get(i).equals(senhaDigitada)){
                 loginValido = 2;
                 break;
             }
-        }
+        }*/
 
         if (loginValido == 1) {
             this.dispose();
             Pedido pedido = new Pedido(); // Abre a nova página de Pedido
             pedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
-        } else if (loginValido == 2) {
+        } /*else if (loginValido == 2) {
             this.dispose();
             new Comanda();
-        } else {
+        }*/ else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.", "Erro de login", JOptionPane.WARNING_MESSAGE);
         }
     }
