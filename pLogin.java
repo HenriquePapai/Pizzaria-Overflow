@@ -28,7 +28,7 @@ class Login extends JFrame{
     private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
 
     // Método para decifrar o texto com a cifra de César com pulo variavel
-    public static String decifrarTexto(String textoCifrado) {
+    public String decifrarTexto(String textoCifrado) {
         String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.";
         StringBuilder textoDecifrado = new StringBuilder();
         int salto = 2; // Salto inicial
@@ -48,7 +48,7 @@ class Login extends JFrame{
     }
 
     // Lê o conteúdo do arquivo
-    public static ArrayList<String> lerArquivo(String nomeArquivo) {
+    public ArrayList<String> lerArquivo(String nomeArquivo) {
         ArrayList<String> list = new ArrayList<>();
 
         // Tenta ler o arquivo

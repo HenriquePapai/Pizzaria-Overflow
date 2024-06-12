@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-class Cadastro extends JFrame{
+class Cadastro extends JFrame {
     private JTextField nome;
     private JTextField email;
     private JTextField cpf;
@@ -16,75 +16,70 @@ class Cadastro extends JFrame{
         setTitle("Cadastro");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false); // trava o tamanho da tela
-        setLocationRelativeTo(null); // centraliza a tela
+        setResizable(false);
+        setLocationRelativeTo(null);
 
         setLayout(null);
 
-
-        // Label
+        // Labels
         JLabel titulo = new JLabel("Cadastro");
-        titulo.setBounds(390, 25, 300, 80); // margem esquerda, cima, comprimento, altura
+        titulo.setBounds(390, 25, 300, 80);
         titulo.setFont(new Font("Arial", Font.BOLD, 50));
         add(titulo);
 
         JLabel jLabel = new JLabel("Nome:");
-        jLabel.setBounds(290, 103, 90, 50); // margem esquerda, cima, comprimento, altura
+        jLabel.setBounds(290, 103, 90, 50);
         jLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel);
 
         JLabel jLabel2 = new JLabel("E-mail:");
-        jLabel2.setBounds(290, 173, 90, 50); // margem esquerda, cima, comprimento, altura
+        jLabel2.setBounds(290, 173, 90, 50);
         jLabel2.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel2);
 
         JLabel jLabel3 = new JLabel("CPF:");
-        jLabel3.setBounds(290, 243, 90, 50); // margem esquerda, cima, comprimento, altura
+        jLabel3.setBounds(290, 243, 90, 50);
         jLabel3.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel3);
 
         JLabel jLabel4 = new JLabel("Senha:");
-        jLabel4.setBounds(290, 313, 90, 50); // margem esquerda, cima, comprimento, altura
+        jLabel4.setBounds(290, 313, 90, 50);
         jLabel4.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel4);
 
-
-
-        // Campos
+        // Campos de texto
         nome = new JTextField();
-        nome.setBounds(290, 140, 400, 40); // margem esquerda, cima, comprimento, altura campo
-        nome.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        nome.setBounds(290, 140, 400, 40);
+        nome.setFont(new Font("Arial", Font.BOLD, 20));
         add(nome);
 
         email = new JTextField();
-        email.setBounds(290, 210, 400, 40); // margem esquerda, cima, comprimento, altura campo
-        email.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        email.setBounds(290, 210, 400, 40);
+        email.setFont(new Font("Arial", Font.BOLD, 20));
         add(email);
 
         cpf = new JTextField();
-        cpf.setBounds(290, 280, 400, 40); // margem esquerda, cima, comprimento, altura campo
-        cpf.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        cpf.setBounds(290, 280, 400, 40);
+        cpf.setFont(new Font("Arial", Font.BOLD, 20));
         add(cpf);
 
         senha = new JPasswordField();
-        senha.setBounds(290, 350, 400, 40); // margem esquerda, cima, comprimento, altura campo
-        senha.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        senha.setBounds(290, 350, 400, 40);
+        senha.setFont(new Font("Arial", Font.BOLD, 20));
         add(senha);
-
-
 
         // Botões
         JButton jButton = new JButton("Cadastrar");
-        jButton.setBounds(290, 405, 400, 40); // margem esquerda, cima, comprimento, altura botão
-        jButton.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        jButton.setBounds(290, 405, 400, 40);
+        jButton.setFont(new Font("Arial", Font.BOLD, 20));
         jButton.setForeground(new Color(0, 0, 0));
         jButton.setBackground(new Color(190, 196, 201));
         add(jButton);
         jButton.addActionListener(this::entrar);
 
         JButton jButton2 = new JButton("Já tenho uma conta");
-        jButton2.setBounds(290, 460, 400, 40); // margem esquerda, cima, comprimento, altura botão
-        jButton2.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
+        jButton2.setBounds(290, 460, 400, 40);
+        jButton2.setFont(new Font("Arial", Font.BOLD, 20));
         jButton2.setForeground(new Color(0, 0, 0));
         jButton2.setBackground(new Color(190, 196, 201));
         add(jButton2);
@@ -94,59 +89,48 @@ class Cadastro extends JFrame{
     }
 
     private void entrar(ActionEvent actionEvent) {
-        // cria os ArrayList para armazenar os dados do usuário
         ArrayList<String> user = new ArrayList<>();
         ArrayList<String> pass = new ArrayList<>();
         ArrayList<String> name = new ArrayList<>();
 
-        // Obtém os dados digitados pelo usuário para cadastro
         String nomeDigitado = nome.getText();
         String emailDigitado = email.getText();
-        //String cpfDigitado = cpf.getText();
-        char[] senhaArray = senha.getPassword();  // converte a senha em uma String
-        String senhaDigitada = new String(senhaArray); // pega a senha digitada pelo usuário
+        char[] senhaArray = senha.getPassword();
+        String senhaDigitada = new String(senhaArray);
 
-        // Adicionar os novos dados às listas
         user.add(emailDigitado + ",");
         pass.add(senhaDigitada + ",");
         name.add(nomeDigitado + ",");
 
-        // Escreve nas listas dos arquivos correspondentes
         escreverArquivo(user, Main.localArquivo + "users.txt");
         escreverArquivo(pass, Main.localArquivo + "senhas.txt");
         escreverArquivo(name, Main.localArquivo + "name.txt");
 
-        // Fechar a janela atual e abrir a de login
         this.dispose();
         new Login();
     }
 
-    // Método para cifrar o texto com a cifra de César com pulo variavel
-    public static String cifrarTexto(String texto) {
+    public String cifrarTexto(String texto) {
         String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@.";
         StringBuilder textoCifrado = new StringBuilder();
-        int salto = 2; // Salto inicial
+        int salto = 2;
         for (char caracter : texto.toCharArray()) {
             int index = alfabeto.indexOf(caracter);
             if (index != -1) {
-                // Cifra o caractere se ele estiver no alfabeto
                 char cifrado = alfabeto.charAt((index + salto) % alfabeto.length());
                 textoCifrado.append(cifrado);
-                salto++; // Aumenta o salto para o próximo caractere
+                salto++;
             } else {
-                // Mantém o caractere original se não estiver no alfabeto
                 textoCifrado.append(caracter);
             }
         }
         return textoCifrado.toString();
     }
 
-    // Método para escrever no arquivo
-    public static void escreverArquivo(ArrayList<String> lista, String nomeArquivo) {
+    public void escreverArquivo(ArrayList<String> lista, String nomeArquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo, true))) {
-            for (String item : lista) {  // Escreve cada item da lista no arquivo
-                // Cifrar o conteudo
-                String itemCifrado = cifrarTexto(item);  // Cifra o item antes de escrever no arquivo
+            for (String item : lista) {
+                String itemCifrado = cifrarTexto(item);
                 writer.write(itemCifrado + "\n");
             }
         } catch (IOException e) {
@@ -156,8 +140,12 @@ class Cadastro extends JFrame{
     }
 
     private void cadastro(ActionEvent actionEvent) {
-        this.dispose(); // fecha a janela atual
-        new Login(); // carrega a página de login
+        this.dispose();
+        new Login();
+    }
+
+    // Método main para iniciar a aplicação
+    public static void main(String[] args) {
+        new Cadastro();
     }
 }
-
