@@ -7,6 +7,6 @@ class Main {
     //ConfirmaPedido pConfirmaPedido = new ConfirmaPedido();
   }
 
-  // Alterar aqui para o código funcionar
+  // Insira o local do arquivo aqui com uma / no final
   public static String localArquivo = "";
 }
