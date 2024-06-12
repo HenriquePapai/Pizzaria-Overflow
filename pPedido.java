@@ -137,11 +137,11 @@ class Pedido extends JFrame {
             ValorTotal += pizza.calculaPreco(); // Calcula o valor total somando o preço da pizza selecionada
             valorTotal = ValorTotal;
             this.jLabel4.setText("Valor total: " + ValorTotal);
-            PedidoItem pedidoItem = new PedidoItem(tamanhoSelecionado, saborSelecionado, pizza.calculaPreco());
+            PedidoItem pedidoItem = new PedidoItem(nomeUsuario, tamanhoSelecionado, saborSelecionado, pizza.calculaPreco());
             pedidos.add(pedidoItem);
 
             try {
-                FileOutputStream fos = new FileOutputStream("pedidos.ser"); // cria do FileOutputStream para escrever no arquivo "pedidos.ser"
+                FileOutputStream fos = new FileOutputStream("pedidos.txt"); // cria do FileOutputStream para escrever no arquivo "pedidos.txt"
                 ObjectOutputStream oos = new ObjectOutputStream(fos); // cria o ObjectOutputStream para escrever no FileOutputStream
                 oos.writeObject(pedidos); // Escreve no "pedidos.ser" usando o ObjectOutputStream
                 oos.close(); // Fecha o ObjectOutputStream
@@ -157,6 +157,5 @@ class Pedido extends JFrame {
     private void ConfirmaPedido(ActionEvent actionEvent) { // redireciona para a página de confirmar pedido
         this.dispose(); // fecha a janela atual
         ConfirmaPedido confirmaPedido = new ConfirmaPedido(); // carrega a página de login
-        confirmaPedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
     }
 }

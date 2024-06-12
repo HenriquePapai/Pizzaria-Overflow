@@ -11,6 +11,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.io.File;
+
 
 class Login extends JFrame{
     private JTextField email;
@@ -148,6 +150,7 @@ class Login extends JFrame{
                 loginValido = 1;
                 nomeUsuario = name.get(i); // pega o nome do usuário correspondente ao login e salva no nomeUsuario
                 //emailUsuario = emailDigitado; // pega o email do usuário correspondente ao login e salva no emailUsuario
+                new File("pedidos.txt").delete(); // Comando para deletar os pedidos do usuario anterior
                 break;
             }
         }
