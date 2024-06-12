@@ -25,11 +25,7 @@ class Login extends JFrame{
 
     private ArrayList<String> name = lerArquivo(Main.localArquivo + "name.txt");
 
-    /*
-    // Novos ArrayList
-    private ArrayList<String> admuser = lerArquivo(Main.localArquivo + "admusers.txt");
-
-    private ArrayList<String> admpass = lerArquivo(Main.localArquivo + "admsenhas.txt");*/
+    private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
 
     // Método para decifrar o texto com a cifra de César com pulo variavel
     public static String decifrarTexto(String textoCifrado) {
@@ -139,8 +135,6 @@ class Login extends JFrame{
         setVisible(true);
     }
 
-    private String nomeUsuario; // adiciona um membro para armazenar o nome do usuário
-
     private void entrar(ActionEvent actionEvent) {
         int loginValido = 0;
         String emailDigitado = email.getText(); // pega o email digitado pelo usuário
@@ -150,26 +144,16 @@ class Login extends JFrame{
             if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) { // Pega o texto que está dentro do JTextField
                 loginValido = 1;
                 nomeUsuario = name.get(i); // pega o nome do usuário correspondente ao login e salva no nomeUsuario
-                //emailUsuario = emailDigitado; // pega o email do usuário correspondente ao login e salva no emailUsuario
                 new File("pedidos.txt").delete(); // Comando para deletar os pedidos do usuario anterior
                 break;
             }
         }
-        /*for (int i = 0; i < admuser.size(); i++) {
-            if (admuser.get(i).equals(emailDigitado) && admpass.get(i).equals(senhaDigitada)){
-                loginValido = 2;
-                break;
-            }
-        }*/
 
         if (loginValido == 1) {
             this.dispose();
             Pedido pedido = new Pedido(); // Abre a nova página de Pedido
             pedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
-        } /*else if (loginValido == 2) {
-            this.dispose();
-            new Comanda();
-        }*/ else {
+        } else {
             JOptionPane.showMessageDialog(null, "E-mail ou senha incorretos.", "Erro de login", JOptionPane.WARNING_MESSAGE);
         }
     }
