@@ -74,6 +74,7 @@ class ConfirmaPedido extends JFrame {
     }
 
     private void Voltar(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null, "Será necessário criar um novo pedido do zero!", "Pedido reiniciado", JOptionPane.WARNING_MESSAGE);
         this.dispose();
         new Pedido();
     }

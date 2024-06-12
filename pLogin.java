@@ -16,7 +16,7 @@ import java.io.File;
 
 class Login extends JFrame{
     private JTextField email;
-    private JTextField senha;
+    private JPasswordField senha;
 
     // Criando ArrayList e lendo o conteúdo do arquivos respectivos arquivos
     private ArrayList<String> user = lerArquivo(Main.localArquivo + "users.txt");
@@ -112,7 +112,7 @@ class Login extends JFrame{
         email.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
         add(email);
 
-        senha = new JTextField();
+        senha = new JPasswordField();
         senha.setBounds(290, 290, 400, 40); // margem esquerda, cima, comprimento, altura campo
         senha.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
         add(senha);
@@ -144,7 +144,8 @@ class Login extends JFrame{
     private void entrar(ActionEvent actionEvent) {
         int loginValido = 0;
         String emailDigitado = email.getText(); // pega o email digitado pelo usuário
-        String senhaDigitada = senha.getText(); // pega a senha digitado pelo usuário
+        char[] senhaArray = senha.getPassword();  // converte a senha em uma String
+        String senhaDigitada = new String(senhaArray); // pega a senha digitada pelo usuário
         for (int i = 0; i < user.size(); i++) {
             if (user.get(i).equals(emailDigitado) && pass.get(i).equals(senhaDigitada)) { // Pega o texto que está dentro do JTextField
                 loginValido = 1;

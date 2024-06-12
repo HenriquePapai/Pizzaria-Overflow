@@ -10,7 +10,7 @@ class Cadastro extends JFrame{
     private JTextField nome;
     private JTextField email;
     private JTextField cpf;
-    private JTextField senha;
+    private JPasswordField senha;
 
     public Cadastro() {
         setTitle("Cadastro");
@@ -66,7 +66,7 @@ class Cadastro extends JFrame{
         cpf.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
         add(cpf);
 
-        senha = new JTextField();
+        senha = new JPasswordField();
         senha.setBounds(290, 350, 400, 40); // margem esquerda, cima, comprimento, altura campo
         senha.setFont(new Font("Arial", Font.BOLD, 20)); // fonte, tipo, tamanho
         add(senha);
@@ -103,7 +103,8 @@ class Cadastro extends JFrame{
         String nomeDigitado = nome.getText();
         String emailDigitado = email.getText();
         //String cpfDigitado = cpf.getText();
-        String senhaDigitada = senha.getText();
+        char[] senhaArray = senha.getPassword();  // converte a senha em uma String
+        String senhaDigitada = new String(senhaArray); // pega a senha digitada pelo usuário
 
         // Adicionar os novos dados às listas
         user.add(emailDigitado + ",");

@@ -12,7 +12,6 @@ class Pedido extends JFrame {
     private JLabel jLabel4;
     private String nomeUsuario;
     private ArrayList<PedidoItem> pedidos = new ArrayList<PedidoItem>();
-    private static double valorTotal = 0.0;
 
     // Método setter para nomeUsuario
     public void setNomeUsuario(String nomeUsuario) {
@@ -50,7 +49,6 @@ class Pedido extends JFrame {
         jLabel3.setFont(new Font("Arial", Font.BOLD, 20));
         add(jLabel3);
 
-        ValorTotal = valorTotal; // armazena o valor total em uma variável estática
         jLabel4 = new JLabel("Valor total: " + ValorTotal);
         jLabel4.setBounds(290, 368, 200, 50); // margem esquerda, cima, comprimento, altura
         jLabel4.setFont(new Font("Arial", Font.BOLD, 20));
@@ -135,7 +133,6 @@ class Pedido extends JFrame {
 
         if (pizza != null) {
             ValorTotal += pizza.calculaPreco(); // Calcula o valor total somando o preço da pizza selecionada
-            valorTotal = ValorTotal;
             this.jLabel4.setText("Valor total: " + ValorTotal);
             PedidoItem pedidoItem = new PedidoItem(nomeUsuario, tamanhoSelecionado, saborSelecionado, pizza.calculaPreco());
             pedidos.add(pedidoItem);
@@ -156,6 +153,6 @@ class Pedido extends JFrame {
 
     private void ConfirmaPedido(ActionEvent actionEvent) { // redireciona para a página de confirmar pedido
         this.dispose(); // fecha a janela atual
-        ConfirmaPedido confirmaPedido = new ConfirmaPedido(); // carrega a página de login
+        new ConfirmaPedido(); // carrega a página de ConfirmaPedido
     }
 }

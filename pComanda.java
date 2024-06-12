@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 class Comanda extends JFrame {
