@@ -153,6 +153,7 @@ class Pedido extends JFrame {
 
     private void ConfirmaPedido(ActionEvent actionEvent) { // redireciona para a página de confirmar pedido
         this.dispose(); // fecha a janela atual
-        new ConfirmaPedido(); // carrega a página de ConfirmaPedido
+        ConfirmaPedido pedido = new ConfirmaPedido(); // Abre a nova página de Pedido
+        pedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
     }
 }

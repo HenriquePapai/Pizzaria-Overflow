@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,6 +13,13 @@ import java.util.ArrayList;
 class ConfirmaPedido extends JFrame {
 
     private ArrayList<PedidoItem> mostraPedidod;
+
+    private String nomeUsuario;
+
+    // Método setter para nomeUsuario
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario.toUpperCase(); // Converte para maiúsculas e armazena
+    }
 
     public ConfirmaPedido() {
         this.mostraPedidod = new ArrayList<PedidoItem>();
@@ -76,6 +84,8 @@ class ConfirmaPedido extends JFrame {
     private void Voltar(ActionEvent actionEvent) {
         JOptionPane.showMessageDialog(null, "Será necessário criar um novo pedido do zero!", "Pedido reiniciado", JOptionPane.WARNING_MESSAGE);
         this.dispose();
-        new Pedido();
+        new File("pedidos.txt").delete(); // Comando para deletar os pedidos do usuario anterior
+        Pedido pedido = new Pedido(); // Abre a nova página de Pedido
+        pedido.setNomeUsuario(nomeUsuario); // Define o nome do usuário na instância de Pedido
     }
 }
