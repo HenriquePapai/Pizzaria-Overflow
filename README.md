@@ -1,4 +1,4 @@
-O objetivo deste projeto foi criar uma pizzaria chamada "Pizzaria-Overflow" em java buscando alguns atingir alguns requisitos como:
+O objetivo deste projeto foi criar uma pizzaria chamada "Pizzaria-Overflow" em java buscando atingir alguns requisitos como:
 - Interface gráfica.
 - Classes e métodos abstratos.
 - Relações de herança.
