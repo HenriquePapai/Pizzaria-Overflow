@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 class ConfirmaPedido extends JFrame {
 
-    private ArrayList<PedidoItem> mostraPedidod;
+    private ArrayList<PedidoItem> mostraPedido;
 
     private String nomeUsuario;
 
@@ -22,7 +22,7 @@ class ConfirmaPedido extends JFrame {
     }
 
     public ConfirmaPedido() {
-        this.mostraPedidod = new ArrayList<PedidoItem>();
+        this.mostraPedido = new ArrayList<PedidoItem>();
         configurarJanela();
         adicionarComponentes();
     }
@@ -63,17 +63,17 @@ class ConfirmaPedido extends JFrame {
 
         setVisible(true);
     }
-
+    
     private void FinalizarPedido(ActionEvent actionEvent) {
         try {
             FileInputStream fis = new FileInputStream("pedidos.txt"); // Abre arquivo para leitura usando FileInputStream
             ObjectInputStream ois = new ObjectInputStream(fis); // Cria o ObjectInputStream para ler o arquivo
-            mostraPedidod = (ArrayList<PedidoItem>) ois.readObject(); // Lê o arquivo e armazena em uma lista
+            mostraPedido = (ArrayList<PedidoItem>) ois.readObject(); // Lê o arquivo e armazena em uma lista
             ois.close();
             fis.close();
 
             JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso, ele será entregue em sua residência em breve!", "Pedido finalizado", JOptionPane.INFORMATION_MESSAGE);
-            Comanda comanda = new Comanda(mostraPedidod); // Passa a lista deserializada para o construtor de Comanda
+            Comanda comanda = new Comanda(mostraPedido); // Passa a lista deserializada para o construtor de Comanda
             comanda.setVisible(true);
             this.dispose();
         } catch (IOException | ClassNotFoundException e) {
